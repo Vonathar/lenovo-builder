@@ -46,9 +46,16 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>1.5.0</version>
+          <version>3.0.0</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+            </execution>
+          </executions>
           <configuration>
-            <mainClass>com.caputo.app.App</mainClass>
+            <mainClass>com.caputo.lenovo.App</mainClass>
           </configuration>
         </plugin>
         <plugin>
