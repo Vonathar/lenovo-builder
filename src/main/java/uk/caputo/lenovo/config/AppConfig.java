@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import uk.caputo.lenovo.components.HtmlComponent;
 import uk.caputo.lenovo.components.HtmlComponentSettings;
+import uk.caputo.lenovo.components.HtmlComponentStyles;
+import uk.caputo.lenovo.components.SettingsParser;
 import uk.caputo.lenovo.util.BlueprintReader;
 
 @Configuration
@@ -17,9 +19,19 @@ public class AppConfig {
   }
 
   @Bean
-  @Scope("prototype")
+  SettingsParser settingsParser() {
+    return new SettingsParser();
+  }
+
+  @Bean
   HtmlComponentSettings htmlComponentSettings() {
     return new HtmlComponentSettings();
+  }
+
+  @Bean
+  @Scope("prototype")
+  HtmlComponentStyles htmlComponentStyles() {
+    return new HtmlComponentStyles();
   }
 
   @Bean

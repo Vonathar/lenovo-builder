@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import uk.caputo.lenovo.components.HtmlComponent;
+import uk.caputo.lenovo.components.SettingsParser;
 import uk.caputo.lenovo.config.AppConfig;
 
 /**
@@ -30,7 +31,8 @@ public class HtmlComponentController {
     ApplicationContext context = new AnnotationConfigApplicationContext(
         AppConfig.class);
     HtmlComponent component = (HtmlComponent) context.getBean("htmlComponent");
-    component.setSettings(settings);
+    SettingsParser parser = (SettingsParser) context.getBean("settingsParser");
+    parser.parseSettings(settings);
     return component.getHtmlMarkup();
   }
 }
