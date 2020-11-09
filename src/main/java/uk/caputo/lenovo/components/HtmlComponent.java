@@ -25,12 +25,16 @@ public class HtmlComponent {
   /**
    * Builds and returns the HTML markup for the component.
    *
-   * @return the built HTML markup.
+   * @return the HTML markup that's ready to be used.
    */
   public String getHtmlMarkup() {
     loadBlueprint();
     buildStyles();
     return htmlMarkup;
+  }
+
+  private void setHtmlMarkup(String htmlMarkup) {
+    this.htmlMarkup = htmlMarkup;
   }
 
   /**
@@ -45,9 +49,5 @@ public class HtmlComponent {
    */
   private void buildStyles() {
     setHtmlMarkup(styles.build(htmlMarkup));
-  }
-
-  private void setHtmlMarkup(String htmlMarkup) {
-    this.htmlMarkup = htmlMarkup;
   }
 }
