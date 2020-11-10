@@ -2,47 +2,53 @@ package uk.caputo.lenovo.components;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import uk.caputo.lenovo.ComponentType;
+import uk.caputo.lenovo.controller.RequestSettings;
 
 /**
- * An object used to parse all entries from a Map, converting them to more
- * relevant types when appropriate. It directly updates HtmlComponentSettings.
+ * A class used to parse all entries from a RequestSettings Map. All settings
+ * parsed are used to directly call the setters in SettingsBuilder, preparing it
+ * to instantiate a Settings object.
  *
  * @author Gianmarco Caputo
  */
+@Component
 public class SettingsParser {
 
-  @Autowired
-  HtmlComponentSettings settings;
+  private final SettingsBuilder settingsBuilder;
+
+  public SettingsParser(
+      SettingsBuilder settingsBuilder) {
+    this.settingsBuilder = settingsBuilder;
+  }
 
   /**
-   * Parses all settings from a Map and updates the HtmlComponentSettings.
-   * Whenever it's appropriate, optional settings use a default value.
+   * Parses all entries from a RequestSettings Map, then updates the
+   * corresponding fields in SettingsBuilder. Uses a default value for optional
+   * fields which were not found in the RequestSettings.
    *
-   * @param reqSettings the key:value pairs for component settings.
+   * @param reqSettings the build settings for the component.
    */
-  public void parseSettings(Map<String, String> reqSettings) {
-
-    settings.setType(ComponentType.from(reqSettings.get("type")));
-    settings.setWrapperClassName(
-        reqSettings.getOrDefault("wrapperClassName", "sec"));
-    settings.setPrimaryFontSize(
-        reqSettings.getOrDefault("primaryFontSize", "64px"));
-    settings.setSecondaryFontSize(
-        reqSettings.getOrDefault("secondaryFontSize", "20px"));
+  public void parse(RequestSettings reqSettings) {
+    settingsBuilder.setType(ComponentType.from(reqSettings.get("type")))
+        .setWrapperClassName(
+            reqSettings.getOrDefault("wrapperClassName", "sec"))
+        .setPrimaryFontSize(
+            reqSettings.getOrDefault("primaryFontSize", "64px"))
+        .setSecondaryFontSize(
+            reqSettings.getOrDefault("secondaryFontSize", "20px"));
 
     if (reqSettings.containsKey("backgroundImageUrl")) {
       try {
-        settings.setBackgroundImageUrl(
+        settingsBuilder.setBackgroundImageUrl(
             new URL(reqSettings.get("backgroundImageUrl")));
       } catch (MalformedURLException e) {
         System.out.println("Invalid URL received for backgroundImageUrl: "
             + reqSettings.get("backgroundImageUrl"));
       }
     } else {
-      settings.setBackgroundColour(
+      settingsBuilder.setBackgroundColour(
           reqSettings.getOrDefault("backgroundColour", "#FFFFFF"));
     }
 
