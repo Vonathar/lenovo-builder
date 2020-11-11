@@ -1,6 +1,5 @@
 package uk.caputo.lenovo.components;
 
-import java.net.URL;
 import org.springframework.stereotype.Component;
 import uk.caputo.lenovo.ComponentType;
 
@@ -15,12 +14,18 @@ import uk.caputo.lenovo.ComponentType;
 @Component
 public class SettingsBuilder {
 
+  private final SettingsValidator settingsValidator;
   private ComponentType type;
   private String wrapperClassName;
   private String primaryFontSize;
   private String secondaryFontSize;
   private String backgroundColour;
-  private URL backgroundImageUrl;
+  private String backgroundImageUrl;
+
+  public SettingsBuilder(
+      SettingsValidator settingsValidator) {
+    this.settingsValidator = settingsValidator;
+  }
 
   public SettingsBuilder setType(ComponentType type) {
     this.type = type;
@@ -48,18 +53,20 @@ public class SettingsBuilder {
     return this;
   }
 
-  public SettingsBuilder setBackgroundImageUrl(URL backgroundImageUrl) {
+  public SettingsBuilder setBackgroundImageUrl(String backgroundImageUrl) {
     this.backgroundImageUrl = backgroundImageUrl;
     return this;
   }
 
   /**
-   * Instantiates and returns a new Settings object.
+   * Instantiates, validates and returns a new Settings object.
    *
    * @return an instance of the Settings object.
    */
   public Settings build() {
-    return new Settings(type, wrapperClassName, primaryFontSize,
+    Settings settings = new Settings(type, wrapperClassName, primaryFontSize,
         secondaryFontSize, backgroundColour, backgroundImageUrl);
+    settingsValidator.validate(settings);
+    return settings;
   }
 }
