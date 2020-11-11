@@ -1,7 +1,5 @@
 package uk.caputo.lenovo.components;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import org.springframework.stereotype.Component;
 import uk.caputo.lenovo.ComponentType;
 import uk.caputo.lenovo.controller.RequestSettings;
@@ -37,21 +35,14 @@ public class SettingsParser {
         .setPrimaryFontSize(
             reqSettings.getOrDefault("primaryFontSize", "64px"))
         .setSecondaryFontSize(
-            reqSettings.getOrDefault("secondaryFontSize", "20px"));
+            reqSettings.getOrDefault("secondaryFontSize", "20px"))
+        .setBackgroundColour(
+            reqSettings.getOrDefault("backgroundColour", "#FFFFFF"))
+        .setBackgroundImageUrl(
+            reqSettings.getOrDefault("backgroundImageUrl", null));
 
-    if (reqSettings.containsKey("backgroundImageUrl")) {
-      try {
-        settingsBuilder.setBackgroundImageUrl(
-            new URL(reqSettings.get("backgroundImageUrl")));
-      } catch (MalformedURLException e) {
-        System.out.println("Invalid URL received for backgroundImageUrl: "
-            + reqSettings.get("backgroundImageUrl"));
-      }
-    } else {
-      settingsBuilder.setBackgroundColour(
-          reqSettings.getOrDefault("backgroundColour", "#FFFFFF"));
-    }
-
+    settingsBuilder
+        .setBackgroundImageUrl(reqSettings.get("backgroundImageUrl"));
   }
 
 }
