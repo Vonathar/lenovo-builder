@@ -1,6 +1,5 @@
 package uk.caputo.lenovo.components;
 
-import java.net.URL;
 import uk.caputo.lenovo.ComponentType;
 
 /**
@@ -18,11 +17,11 @@ public class Settings {
   private final String primaryFontSize;
   private final String secondaryFontSize;
   private final String backgroundColour;
-  private final URL backgroundImageUrl;
+  private final String backgroundImageUrl;
 
   public Settings(ComponentType type, String wrapperClassName,
       String primaryFontSize, String secondaryFontSize,
-      String backgroundColour, URL backgroundImageUrl) {
+      String backgroundColour, String backgroundImageUrl) {
     this.type = type;
     this.wrapperClassName = wrapperClassName;
     this.primaryFontSize = primaryFontSize;
@@ -51,7 +50,7 @@ public class Settings {
     return backgroundColour;
   }
 
-  public URL getBackgroundImageUrl() {
+  public String getBackgroundImageUrl() {
     return backgroundImageUrl;
   }
 
