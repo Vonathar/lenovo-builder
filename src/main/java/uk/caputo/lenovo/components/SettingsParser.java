@@ -40,9 +40,5 @@ public class SettingsParser {
             reqSettings.getOrDefault("backgroundColour", "#FFFFFF"))
         .setBackgroundImageUrl(
             reqSettings.getOrDefault("backgroundImageUrl", null));
-
-    settingsBuilder
-        .setBackgroundImageUrl(reqSettings.get("backgroundImageUrl"));
   }
-
 }
