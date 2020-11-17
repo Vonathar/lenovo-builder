@@ -1,0 +1,55 @@
+<style
+    type="text/css">@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400,700,900&display=swap');
+
+.$wrapperClassName, body {
+  position: relative;
+  width: 100% !important;
+  $backgroundStyles
+  background-size: cover;
+  padding: 200px 20px 55px 79px !important;
+}
+
+/* Typography */
+.$wrapperClassName__primary-text {
+  font-family: 'Lato-Bold', sans-serif;
+  font-weight: bold;
+  font-size: $primaryFontSize !important;
+  color: #ffffff !important;
+  margin-bottom: 20px !important;
+}
+
+.$wrapperClassName__secondary-text {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: $secondaryFontSize !important;
+  color: #ffffff !important;
+  margin-bottom: 45px !important;
+}
+
+@media only screen and (max-width: 880px) {
+  .$wrapperClassName {
+    padding: 100px 60px 55px 20px !important;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .$wrapperClassName {
+    padding: 70px 20px 35px 20px !important;
+    margin-top: 0 !important;
+  }
+
+  .$wrapperClassName__primary-text {
+    font-size: $secondaryFontSize-mobile !important;
+    max-width: 305px;
+  }
+
+  .$wrapperClassName__secondary-text {
+    font-size: 16px !important;
+    line-height: 22px;
+    max-width: 315px;
+  }
+}
+</style>
+
+<p class="$wrapperClassName__primary-text">Primary text</p>
+<p class="$wrapperClassName__secondary-text">Secondary text</p>
